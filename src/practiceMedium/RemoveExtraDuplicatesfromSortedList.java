@@ -12,32 +12,26 @@ public class RemoveExtraDuplicatesfromSortedList {
 		if(head == null || head.next == null){
 			return head;
 		}
-		ListNode fake = new ListNode (0);
-		fake.next = head;
-		ListNode slow = fake;
-		ListNode pre = null;
-		ListNode fast = head.next;
-		while(fast != null){
-			if(slow == fake || slow.val != fast.val){
-				pre = slow;
-				slow = slow.next;
-				slow.val = fast.val;
-			} else{
-				while(fast.next != null && fast.next.val == slow.val){
-					fast = fast.next;
-				}
-				slow = pre;
-				slow.next = fast.next;
-			}
-			fast = fast.next;
-		}
-		
-		//slow.next = null;
-	    return fake.next;
+		ListNode dummy = new ListNode(0), fast = head, slow = dummy;
+	    slow.next = fast;
+	    while(fast != null) {
+	    	while (fast.next != null && fast.val == fast.next.val) {
+	     		fast = fast.next;    //while loop to find the last node of the dups.
+	    	}
+	    	if (slow.next != fast) { //duplicates detected.
+	    		slow.next = fast.next; //remove the dups.
+	    		fast = slow.next;     //reposition the fast pointer.
+	    	} else { //no dup, move down both pointer.
+	    		slow = slow.next;
+	    		fast = fast.next;
+	    	}
+	    	
+	    }
+	    return dummy.next;
 	}
 	public static void buildNode(ListNode one){
 		ListNode curr = one;
-		for(int i = 1; i < 10; i ++){
+		for(int i = 1; i < 10; i++){
 			curr.next = new ListNode(i);
 			curr = curr.next;
 		}
