@@ -32,6 +32,13 @@ public class plusOne {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		float sum = 0;
+		float temp = 365;
+		float tem2 = 366;
+		for(int i = 1; i < 201; i++){
+			sum += ((364/(tem2 - i)));
+		}
+		System.out.println(sum);
 
 	}
 
